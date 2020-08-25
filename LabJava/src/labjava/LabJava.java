@@ -22,6 +22,14 @@ public class LabJava {
         System.out.println("Ingrese autor del nuevo repositorio");
         String autorRepo=input.nextLine();
         System.out.println("El autor del repo es: " + autorRepo);
+        
+        Repositorio MyRepo=new Repositorio();
+        Fecha fechaActual=new Fecha();
+        String fechaCreacion=fechaActual.obtenerFechaActual();
+        MyRepo.nombreRepo=nombreRepo;
+        MyRepo.autorRepo=autorRepo;
+        MyRepo.fechaCreacion=fechaCreacion;
+        
         System.out.println("\n### SIMULACIÓN DE GIT ###");
         System.out.println("\nEscoja su opción: ");
         System.out.println("\n1. add");
