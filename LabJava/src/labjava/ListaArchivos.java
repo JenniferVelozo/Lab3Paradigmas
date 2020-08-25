@@ -2,14 +2,14 @@ package labjava;
 import java.util.ArrayList;
 public class ListaArchivos {
     //Atributos
-    public ArrayList<ArrayList<String>> ListaArchivos;
-    public int cantidadArchivos=ListaArchivos.size();
+    ArrayList<Archivo> ListaArchivos;
+    //int cantidadArchivos=ListaArchivos.size();
     //Métodos
-    public ListaArchivos(ArrayList<ArrayList<String>> archivos){
+    public ListaArchivos(ArrayList<Archivo> archivos){
         this.ListaArchivos=archivos;
-        this.cantidadArchivos=archivos.size();
+        //this.cantidadArchivos=archivos.size();
     }
-    public void agregarArchivo(ArrayList<String> archivo){
+    public void agregarArchivo(Archivo archivo){
         this.ListaArchivos.add(archivo);
     }
 }
