@@ -15,6 +15,7 @@ public class Archivo {
         this.contenido=contenido;
     }
     
+    //Método para imprimir un archivo 
     public void imprimirArchivo(Archivo archivo){
         System.out.println("Nombre del archivo: "+archivo.nombreArchivo);
         System.out.println("Fecha: "+archivo.fechaMod);
