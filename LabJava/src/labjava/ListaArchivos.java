@@ -12,9 +12,9 @@ public class ListaArchivos {
         this.cantidadArchivos=0;
     }
     //Método que agrega un archivo a una lista de archivos, esto puede ser Workspace o Index
-    public void agregarArchivo(Archivo archivo){
-        this.ListaArchivos.add(archivo);
-        this.cantidadArchivos++;
+    public void agregarArchivo(ListaArchivos lista,Archivo archivo){
+        lista.ListaArchivos.add(archivo);
+        lista.cantidadArchivos++;
     }
     
     //Método que verifica si un determinado archivo está dentro de una lista de archivos,
@@ -22,27 +22,37 @@ public class ListaArchivos {
     public int estaArchivo(ListaArchivos lista, String nombreArchivo){
         for(int i=0;i<lista.cantidadArchivos;i++){
             if (lista.ListaArchivos.get(i).nombreArchivo.equals(nombreArchivo)){
-                return 1;
+                return i;
             }
         }
-        return 0;
+        return -1;
     }
     //Método que entrega una lista de los archivos que sí están en el Workspace
     public ListaArchivos archivosQueEstanEnWS(ListaArchivos lista,ArrayList<String> nombreArchivos){
-        ArrayList<Archivo> archivosQueEstan=new ArrayList<Archivo>();
+        ArrayList<Archivo> archivosQueEstan=new ArrayList<>();
         ListaArchivos archivosDeWs=new ListaArchivos(archivosQueEstan);
         for (int i=0;i<nombreArchivos.size();i++){
-            if(lista.estaArchivo(lista,nombreArchivos.get(i))==1){
-                archivosDeWs.agregarArchivo(lista.ListaArchivos.get(i));
+            int posicion=lista.estaArchivo(lista,nombreArchivos.get(i));
+            if(posicion!=-1){
+                //se agrega el archivo encontrado en el arreglo de archivos que están dentro
+                //del workspace y la lista que ingresó el usuario
+                archivosDeWs.agregarArchivo(archivosDeWs,lista.ListaArchivos.get(posicion));
+
             }
         }
-        
-        System.out.println("Archivos que están en WS: ");
+        /*System.out.println("Archivos que están en WS: ");
         for(int i=0;i<archivosDeWs.cantidadArchivos;i++){
             Archivo archivo=archivosDeWs.ListaArchivos.get(i);
             archivo.imprimirArchivo(archivo);
-        }
-        
+        }*/
         return archivosDeWs;
+    }
+    
+    public void imprimirListaArchivos(ListaArchivos lista){
+        System.out.println("Cantidad de archivos: "+ lista.cantidadArchivos);
+        for(int i=0;i<lista.cantidadArchivos;i++){
+            System.out.println("\nMostrando archivo "+ (i+1));
+            lista.ListaArchivos.get(i).imprimirArchivo(lista.ListaArchivos.get(i));
+        }
     }
 }

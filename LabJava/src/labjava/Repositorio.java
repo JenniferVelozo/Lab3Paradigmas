@@ -22,8 +22,8 @@ public class Repositorio {
         //Se agregan estos 2 archivos al workspace
         ArrayList<Archivo> workspace1=new ArrayList(2);
         ListaArchivos myWS=new ListaArchivos(workspace1);
-        myWS.agregarArchivo(archivo1);
-        myWS.agregarArchivo(archivo2);
+        myWS.agregarArchivo(myWS,archivo1);
+        myWS.agregarArchivo(myWS,archivo2);
         
         int verificador=myWS.estaArchivo(myWS, "Archivo 1");
         System.out.println("verificador: "+ verificador);
@@ -47,9 +47,11 @@ public class Repositorio {
         myRepo.localR=myLocalR;
         myRepo.remoteR=myRemoteR;
     }
-    /*public void gitAdd(Repositorio repo, ListaArchivos archivos){
-        
-    }*/
+    public void gitAdd(Repositorio myRepo, ListaArchivos archivos){
+        for(int i=0;i<archivos.cantidadArchivos;i++){
+            myRepo.index.agregarArchivo(myRepo.index,archivos.ListaArchivos.get(i));
+        }
+    }
     /*public void gitCommit(Repositorio repo, Commit commit){
         
     }*/
@@ -61,7 +63,13 @@ public class Repositorio {
     /*public void gitPull(Repositorio repo){
         
     }*/
-    
+    public void imprimirRepositorio(Repositorio repo){
+        System.out.println("\nMostrando repositorio: ");
+        System.out.println("\nMostrando workspace: ");
+        repo.workspace.imprimirListaArchivos(repo.workspace);
+        System.out.println("\nMostrando index: ");
+        repo.index.imprimirListaArchivos(repo.index);
+    }
     public String obtenerNombreRepo(Repositorio repo){
         return repo.nombreRepo;
     }

@@ -52,7 +52,10 @@ public class LabJava {
                 for(int i=0;i<cantidadArchivos;i++){
                     System.out.println(arregloArchivos.get(i));
                 }
-                ListaArchivos archivosEstan=myRepo.workspace.archivosQueEstanEnWS(myRepo.workspace, arregloArchivos);
+                ListaArchivos archivosToAdd=myRepo.workspace.archivosQueEstanEnWS(myRepo.workspace, arregloArchivos);
+                //System.out.println("cantidad de archivos: " + (archivosToAdd.cantidadArchivos));
+                myRepo.gitAdd(myRepo,archivosToAdd);
+                myRepo.imprimirRepositorio(myRepo);
           
                 break;
             case 2:
