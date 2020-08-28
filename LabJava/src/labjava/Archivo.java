@@ -1,6 +1,7 @@
 
 package labjava;
 
+//Clase Archivo que tiene como atributos un nombre, fecha de modificación y contenido
 public class Archivo {
     //Atributos
     //Nombre, Fecha modificación, Contenido
@@ -17,8 +18,8 @@ public class Archivo {
     
     //Método para imprimir un archivo 
     public void imprimirArchivo(Archivo archivo){
-        System.out.println("Nombre del archivo: "+archivo.nombreArchivo);
-        System.out.println("Fecha: "+archivo.fechaMod);
-        System.out.println("Contenido: "+archivo.contenido);
+        System.out.println("    - Nombre del archivo: "+archivo.nombreArchivo);
+        System.out.println("    - Fecha: "+archivo.fechaMod);
+        System.out.println("    - Contenido: "+archivo.contenido);
     }
 }

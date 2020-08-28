@@ -9,24 +9,25 @@ public class LabJava {
         //Se inicializa el repositorio vacío
         Repositorio myRepo=new Repositorio();
         myRepo.gitInit(myRepo);
-        System.out.println("EL REPOSITORIO INICIAL ES: ");
+        //Se muestra el repositorio inicial al usuario
         myRepo.imprimirRepositorio(myRepo);
        
-        int opcion=0;
+        //Se presenta un menú al usuario mientras la opción sea distinta de 7, es decir, 
+        //mientras el usuario no quiera finalizar la simulación
+        int opcion;
         do{
-        //Se presenta un menú al usuario
-        System.out.println("\n### SIMULACIÓN DE GIT ###");
-        System.out.println("\nEscoja su opción: ");
-        System.out.println("\n1. add");
-        System.out.println("\n2. commit");
-        System.out.println("\n3. pull");
-        System.out.println("\n4. push");
-        System.out.println("\n5. status");
-        System.out.println("\n6. Crear nuevo archivo");
-        System.out.println("\n7. Finalizar simulación");
-        System.out.println("\nINTRODUZCA SU OPCIÓN: ");
-        Scanner input = new Scanner(System.in);
-        opcion=input.nextInt();
+            System.out.println("\n### SIMULACIÓN DE GIT ###");
+            System.out.println("Escoja su opción: ");
+            System.out.println("1. add");
+            System.out.println("2. commit");
+            System.out.println("3. push");
+            System.out.println("4. pull");
+            System.out.println("5. status");
+            System.out.println("6. Crear nuevo archivo");
+            System.out.println("7. Finalizar simulación");
+            System.out.println("\nINTRODUZCA SU OPCIÓN: ");
+            Scanner input = new Scanner(System.in);
+            opcion=input.nextInt();
             switch(opcion){
                 case 1:
                     System.out.println("\n*** GIT ADD ***");
@@ -37,13 +38,14 @@ public class LabJava {
                     System.out.println("\n*** GIT COMMIT ***");
                     myRepo.gitCommit(myRepo);
                     myRepo.imprimirRepositorio(myRepo);
-
                     break;
                 case 3:
-                    System.out.println("\n*** GIT PULL ***");
+                    System.out.println("\n*** GIT PUSH ***");
+                    myRepo.gitPush(myRepo);
+                    myRepo.imprimirRepositorio(myRepo);
                     break;
                 case 4:
-                    System.out.println("\n*** GIT PUSH ***");
+                    System.out.println("\n*** GIT PULL ***");
                     break;
                 case 5:
                     System.out.println("\n*** GIT STATUS ***");

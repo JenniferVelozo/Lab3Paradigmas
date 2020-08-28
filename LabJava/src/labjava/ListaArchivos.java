@@ -51,7 +51,7 @@ public class ListaArchivos {
     public void imprimirListaArchivos(ListaArchivos lista){
         System.out.println("Cantidad de archivos: "+ lista.cantidadArchivos);
         for(int i=0;i<lista.cantidadArchivos;i++){
-            System.out.println("\nMOSTRANDO ARCHIVO "+ (i+1));
+            System.out.println("\n   MOSTRANDO ARCHIVO "+ (i+1));
             lista.ListaArchivos.get(i).imprimirArchivo(lista.ListaArchivos.get(i));
         }
     }

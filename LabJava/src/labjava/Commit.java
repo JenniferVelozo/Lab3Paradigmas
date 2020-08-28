@@ -21,7 +21,7 @@ public class Commit {
         System.out.println("Mensaje: "+ commit.mensaje);
         System.out.println("Autor: "+ commit.autor);
         System.out.println("Fecha: "+ commit.timeStamp);
-        System.out.println("Cambios ");
+        System.out.println("Cambios en commit:");
         commit.cambios.imprimirListaArchivos(commit.cambios);
     }
 }
