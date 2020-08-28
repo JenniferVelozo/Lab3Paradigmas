@@ -14,6 +14,14 @@ public class ListaCommits {
         this.cantidadCommits=0;
     }
     
+    public int estaCommit(ListaCommits lista, Commit commit){
+        for (int i=0;i<lista.cantidadCommits;i++){
+            if (lista.ListaCommits.get(i).equals(commit)){
+                return 1;
+            }
+        }
+        return 0;
+    }
     //Método que agrega un commit a una lista de commits, esto puede ser Local Repository o Remote Repository
     public void agregarCommit(ListaCommits lista,Commit commit){
         lista.ListaCommits.add(commit);

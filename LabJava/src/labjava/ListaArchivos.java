@@ -1,7 +1,9 @@
 package labjava;
 import java.util.ArrayList;
-//La clase ListaArchivos representa a las zonas de trabajo Workspace e Index
-//Los atributos de esta clase son: un array list de tipo Archivo, y la cantidad de archivos de este array list
+/**
+ * La clase ListaArchivos representa a las zonas de trabajo Workspace e Index
+ * Los atributos de esta clase son: un array list de tipo Archivo, y la cantidad de archivos de este array list
+ * */
 public class ListaArchivos {
     //Atributos
     //Un array list de archivos 
