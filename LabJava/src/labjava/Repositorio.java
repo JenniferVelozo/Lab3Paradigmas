@@ -5,24 +5,35 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
-//Clase Repositorio que tiene como atributos un nombre, autor, las zonas de trabajo Workspace e Indez representadas
-//como ListaArchivos y las zonas de trabajo Local Repository y Remote Repository representadas como ListaCommits
+/**
+ * Clase para representar un Repositorio en GitHub.
+ * Un Repositorio queda determinado por su nombre, autor, y las 4 zonas de trabajo: Workspace, Index,
+ * Local Repository y Remote Repository.
+ * @author Jennifer Velozo
+ */
 public class Repositorio {
     //Atributos 
-    String nombreRepo;
-    String autorRepo;
-    ListaArchivos workspace;
-    ListaArchivos index;
-    ListaCommits localR;
-    ListaCommits remoteR;
+    String nombreRepo; //nombre del repositorio
+    String autorRepo; //autor del repositorio
+    ListaArchivos workspace; //zona de trabajo Workspace
+    ListaArchivos index; //zona de trabajo Index
+    ListaCommits localR; //zona de trabajo Local Repository
+    ListaCommits remoteR; //zona de trabajo Remote Repository
     
+    /** 
+     * Obtiene la fecha actual del sistema.
+     * @return String que representa la fecha actual.
+     */
     public String obtenerFechaActual(){
         DateFormat df=new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date fecha=new Date();
         return df.format(fecha);
     }
     
+    /** 
+      * Inicializa un nuevo repositorio
+      * @param myRepo Repositorio
+      */
     //Método que inicializa un repositorio
     //ENTRADAS: un repositorio
     //SALIDA: puesto que es de tipo void, no tiene salidas
