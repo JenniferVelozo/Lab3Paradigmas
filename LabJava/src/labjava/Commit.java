@@ -28,13 +28,12 @@ public class Commit {
     
     /** 
      * Imprime un commit, mostrando el mensaje descriptivo, autor, fecha y los cambios hechos.
-     * @param commit Un commit.
      */
-    public void imprimirCommit(Commit commit){
-        System.out.println("Mensaje: "+ commit.mensaje);
-        System.out.println("Autor: "+ commit.autor);
-        System.out.println("Fecha: "+ commit.timeStamp);
+    public void imprimirCommit(){
+        System.out.println("Mensaje: "+ this.mensaje);
+        System.out.println("Autor: "+ this.autor);
+        System.out.println("Fecha: "+ this.timeStamp);
         System.out.println("Cambios en commit:");
-        commit.cambios.imprimirListaArchivos(commit.cambios);
+        this.cambios.imprimirListaArchivos();
     }
 }

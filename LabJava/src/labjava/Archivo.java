@@ -25,11 +25,10 @@ public class Archivo {
     
     /** 
      * Imprime un archivo, mostrando su nombre, fecha y contenido.
-     * @param archivo Un archivo.
      */
-    public void imprimirArchivo(Archivo archivo){
-        System.out.println("    - Nombre del archivo: "+archivo.nombreArchivo);
-        System.out.println("    - Fecha: "+archivo.fechaMod);
-        System.out.println("    - Contenido: "+archivo.contenido);
+    public void imprimirArchivo(){
+        System.out.println("    - Nombre del archivo: "+this.nombreArchivo);
+        System.out.println("    - Fecha: "+this.fechaMod);
+        System.out.println("    - Contenido: "+this.contenido);
     }
 }
