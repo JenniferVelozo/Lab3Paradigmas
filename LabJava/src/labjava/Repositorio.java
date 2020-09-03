@@ -1,14 +1,14 @@
 
 package labjava;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 /**
  * Clase para representar un Repositorio en GitHub.
  * Un Repositorio queda determinado por su nombre, autor, y las 4 zonas de trabajo: Workspace, Index,
- * Local Repository y Remote Repository.
+ * Local Repository y Remote Repository. 
+ * Cabe destacar que la Clase Repositorio tiene a 2 clases ListaArchivos y 2 clases ListaCommits, 
+ * es decir, hay una relación de asociación entre 
+ * Repositorio y ListaArchivos, y entre Repositorio y ListaCommits
  * @author Jennifer Velozo
  */
 public class Repositorio {
@@ -19,16 +19,6 @@ public class Repositorio {
     ListaArchivos index; //zona de trabajo Index
     ListaCommits localR; //zona de trabajo Local Repository
     ListaCommits remoteR; //zona de trabajo Remote Repository
-    
-    /** 
-     * Obtiene la fecha actual del sistema.
-     * @return String que representa la fecha actual.
-     */
-    public String obtenerFechaActual(){
-        DateFormat df=new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date fecha=new Date();
-        return df.format(fecha);
-    }
     
     /** 
       * Inicializa un nuevo repositorio
@@ -44,16 +34,16 @@ public class Repositorio {
         String autor=input.nextLine();
         
         //Se inicializa vacía la zona de trabajo Workspace
-        ListaArchivos myWS=new ListaArchivos(new ArrayList());
+        ListaArchivos myWS=new ListaArchivos(new ArrayList<>());
 
         //Se inicializa vacía la zona de trabajo Index
-        ListaArchivos myIndex= new ListaArchivos(new ArrayList());
+        ListaArchivos myIndex= new ListaArchivos(new ArrayList<>());
         
         //Se iniciliza vacía la zona de trabajo Local Repository
-        ListaCommits myLocalR= new ListaCommits(new ArrayList());
+        ListaCommits myLocalR= new ListaCommits(new ArrayList<>());
 
         //Se inicializa vacía la zona de trabajo Remote Repository
-        ListaCommits myRemoteR= new ListaCommits(new ArrayList());
+        ListaCommits myRemoteR= new ListaCommits(new ArrayList<>());
         
         //Se asignan los datos correspondientes al repositorio
         this.nombreRepo=nombre;
@@ -76,12 +66,10 @@ public class Repositorio {
         Scanner input2 = new Scanner(System.in);
         //Se le solicita al usuario que ingrese el nombre de los archivos que desea añadir al Index
         for (int i=0;i<cantidadArchivos;i++){
-            System.out.println("Ingrese archivo "+ (i+1));
+            System.out.println("Ingrese nombre de archivo "+ (i+1));
             String archivo=input2.nextLine();
             arregloArchivos.add(archivo);
         }
-        //Verificar qué archivos de los que ingresó el usuario pertenecen al Workspoace
-        //para así agregarlos al Index
         System.out.println("Los archivos que desea añadir son: ");
         for(int i=0;i<cantidadArchivos;i++){
             System.out.println(arregloArchivos.get(i));
@@ -89,7 +77,7 @@ public class Repositorio {
         //Se crea una lista con aquellos archivos que pertenecen al Workspace
         ListaArchivos archivos=this.workspace.archivosQueEstan(arregloArchivos);
         for(int i=0;i<archivos.cantidadArchivos;i++){
-            this.index.agregarArchivo(archivos.ListaArchivos.get(i));
+            this.index.agregarArchivo(archivos.listaArchivos.get(i));
         }
     }
     
@@ -108,8 +96,6 @@ public class Repositorio {
             System.out.println("No hay cambios en el Index");
         }
         else{
-            //Se obtiene la fecha actual
-            String fechaCommit=this.obtenerFechaActual();
             //Se le solicita al usuario que ingrese un mensaje descriptivo para el commit
             System.out.println("\nIngrese mensaje descriptivo");
             Scanner input = new Scanner(System.in);
@@ -118,11 +104,11 @@ public class Repositorio {
             System.out.println("\nIngrese autor del commit");
             String autorCommit=input.nextLine();
             //Se crea un objeto de tipo Commit en base a los datos anteriores
-            Commit commit=new Commit(autorCommit,fechaCommit,mensaje,cambios);
+            Commit commit=new Commit(autorCommit,mensaje,cambios);
             this.localR.agregarCommit(commit);
         }
         //Luego de hacer un commit, el Index queda vacío
-        ListaArchivos myIndex= new ListaArchivos(new ArrayList());
+        ListaArchivos myIndex= new ListaArchivos(new ArrayList<>());
         this.index=myIndex;
     }
     
@@ -135,10 +121,10 @@ public class Repositorio {
             System.out.println("No hay commits en el Local Repository");
         }
         else{
-            ListaCommits enviarToRemoteR=this.localR;
-            for(int i=0;i<enviarToRemoteR.cantidadCommits;i++){
-                if(this.remoteR.estaCommit(enviarToRemoteR.ListaCommits.get(i))==0){
-                    this.remoteR.agregarCommit(enviarToRemoteR.ListaCommits.get(i));
+            ListaCommits enviarARemoteR=this.localR;
+            for(int i=0;i<enviarARemoteR.cantidadCommits;i++){
+                if(this.remoteR.estaCommit(enviarARemoteR.listaCommits.get(i))==0){
+                    this.remoteR.agregarCommit(enviarARemoteR.listaCommits.get(i));
                 }
             }
         }
@@ -148,18 +134,28 @@ public class Repositorio {
      */
     public void gitPull(){
         //Se crea una lista de archivos para enviarlos al Workspace
-        ListaArchivos enviarToWS=new ListaArchivos(new ArrayList());
+        ListaArchivos enviarAWS=new ListaArchivos(new ArrayList<>());
         for(int i=0;i<this.remoteR.cantidadCommits;i++){
             //Se obtienen los archivos del commit analizado, que corresponde a los cambios de este
-            ListaArchivos archivosCommit=this.remoteR.ListaCommits.get(i).cambios;
+            ListaArchivos archivosCommit=this.remoteR.listaCommits.get(i).cambios;
             //Se agregan los archivos a la lista de archivos que será enviada al Workspace
             for(int j=0;j<archivosCommit.cantidadArchivos;j++){
-                enviarToWS.agregarArchivo(archivosCommit.ListaArchivos.get(j));
+                enviarAWS.agregarArchivo(archivosCommit.listaArchivos.get(j));
             }
         }
         //Se agregan los archivos en el Workspace
-        for (int i=0;i<enviarToWS.cantidadArchivos;i++){
-            this.workspace.agregarArchivo(enviarToWS.ListaArchivos.get(i));
+        for (int i=0;i<enviarAWS.cantidadArchivos;i++){
+            int posicion=this.workspace.estaArchivo(enviarAWS.listaArchivos.get(i).nombreArchivo);
+            //Si el archivo analizado el Remote Repostiroy no está en el Workspace, entonces se agrega
+            if (posicion==-1){
+                this.workspace.agregarArchivo(enviarAWS.listaArchivos.get(i));
+            }
+            else{
+                //Se sobreescribe el contenido del archivo en caso de haber cambios en él.
+                this.workspace.listaArchivos.get(posicion).contenido=enviarAWS.listaArchivos.get(i).contenido;
+            }
+            
+            
         }
     }
     
@@ -172,7 +168,7 @@ public class Repositorio {
         System.out.println("\nNumero de archivos en el Workspace: "+ this.workspace.cantidadArchivos);
         System.out.println("\nNumero de archivos en el Index: "+ this.index.cantidadArchivos);
         System.out.println("\nNumero de commits en Local Repository: "+this.localR.cantidadCommits);
-        if(!this.localR.ListaCommits.equals(this.remoteR.ListaCommits)){
+        if(!this.localR.listaCommits.equals(this.remoteR.listaCommits)){
             System.out.println("\nEl Remote Repository no está al día");
         }
         else{
@@ -181,7 +177,7 @@ public class Repositorio {
     }
     
     /**
-     * Crea un archivo, solictitando el nombre y contenido al usuario.
+     * Crea un archivo, solicitando el nombre y contenido al usuario.
      */
     public void crearArchivo(){
         /**
@@ -206,30 +202,31 @@ public class Repositorio {
         System.out.println("\nIngrese contenido del archivo: ");
         Scanner entrada = new Scanner(System.in);
         String contenidoArchivo=entrada.nextLine();
-        //Se obtiene la fecha de creación del archivo
-        String fechaArchivo=this.obtenerFechaActual();
         //Se crea un nuevo objeto de tipo Archivo
-        Archivo archivo=new Archivo(nombreArchivo,fechaArchivo,contenidoArchivo);
+        Archivo archivo=new Archivo(nombreArchivo,contenidoArchivo);
         System.out.println("El archivo fue creado exitosamente ");
         //Se imprime el nuevo archivo creado
-        archivo.imprimirArchivo();
+        System.out.println(archivo.toString());
         //Se agrega el nuevo archivo a la zona de trabajo Workspace
         this.workspace.agregarArchivo(archivo);
     }
     
     /**
-     * Imprime un repositori0o, mostrando el contenido de cada una de las
-     * zonas de trabajo.
+     * Entrega un repositorio en forma de string.
+     * @return un string que representa un repositorio.
      */
-    public void imprimirRepositorio(){
-        System.out.println("\n---------------- MOSTRANDO REPOSITORIO ----------------");
-        System.out.println("\n----------------- Mostrando Workspace -----------------");
-        this.workspace.imprimirListaArchivos();
-        System.out.println("\n------------------- Mostrando Index -------------------");
-        this.index.imprimirListaArchivos();
-        System.out.println("\n-------------- Mostrando Local Repository -------------");
-        this.localR.imprimirListaComits();
-        System.out.println("\n------------- Mostrando Remote Repository -------------");
-        this.remoteR.imprimirListaComits();
+    @Override
+    public String toString(){
+        String repoAsString=
+                "\n\n---------------- MOSTRANDO REPOSITORIO ----------------"+
+                "\n\n----------------- Mostrando Workspace -----------------\n"+
+                this.workspace.toString()+
+                "\n\n------------------- Mostrando Index -------------------\n"+
+                this.index.toString()+
+                "\n\n-------------- Mostrando Local Repository -------------\n"+
+                this.localR.toString()+
+                "\n\n------------- Mostrando Remote Repository -------------\n"+
+                this.remoteR.toString();
+        return repoAsString;
     }
 }

@@ -3,10 +3,11 @@ import java.util.ArrayList;
 /**
  * La clase ListaArchivos representa a las zonas de trabajo Workspace e Index.
  * Los atributos de esta clase son: un array list de tipo Archivo, y la cantidad de archivos de este array list.
+ * Cabe destacar que, la clase ListaCommits tiene a Archivo, es decir, hay una relación de asociación entre estas dos clases.
  * */
 public class ListaArchivos {
     //Atributos
-    ArrayList<Archivo> ListaArchivos; //ArrayList de tipo Archivo
+    ArrayList<Archivo> listaArchivos; //ArrayList de tipo Archivo
     int cantidadArchivos; //Cantidad de archivos en la lista
     
     /** 
@@ -14,16 +15,15 @@ public class ListaArchivos {
      * @param archivos ArrayList de tipo Archivo.
      */
     public ListaArchivos(ArrayList<Archivo> archivos){
-        this.ListaArchivos=archivos;
+        this.listaArchivos=archivos;
         this.cantidadArchivos=0;
     }
-    
     /** 
      * Agrega un archivo a una ListaArchivos.
      * @param archivo el archivo a agregar.
      */
     public void agregarArchivo(Archivo archivo){
-        this.ListaArchivos.add(archivo);
+        this.listaArchivos.add(archivo);
         this.cantidadArchivos++;
     }
     
@@ -34,7 +34,7 @@ public class ListaArchivos {
      */
     public int estaArchivo(String nombreArchivo){
         for(int i=0;i<this.cantidadArchivos;i++){
-            if (this.ListaArchivos.get(i).nombreArchivo.equals(nombreArchivo)){
+            if (this.listaArchivos.get(i).nombreArchivo.equals(nombreArchivo)){
                 return i;
             }
         }
@@ -52,7 +52,7 @@ public class ListaArchivos {
         for (int i=0;i<nombreArchivos.size();i++){
             int posicion=this.estaArchivo(nombreArchivos.get(i));
             if(posicion!=-1){
-                archivosMiembros.agregarArchivo(this.ListaArchivos.get(posicion));
+                archivosMiembros.agregarArchivo(this.listaArchivos.get(posicion));
 
             }
         }
@@ -60,13 +60,16 @@ public class ListaArchivos {
     }
     
     /** 
-     * Imprime una lista de archivos, indicando la cantidad de archivos y los archivos como tal.
-     */
-    public void imprimirListaArchivos(){
-        System.out.println("Cantidad de archivos: "+ this.cantidadArchivos);
+     * Entrega un string para representar una
+     * lista de archivos, indicando la cantidad de archivos y los archivos como tal.
+     * @return un string que representa la lista de archivos
+     */    
+    @Override
+    public String toString(){
+        String listaToString="Cantidad de archivos: "+ this.cantidadArchivos;
         for(int i=0;i<this.cantidadArchivos;i++){
-            System.out.println("\n   MOSTRANDO ARCHIVO "+ (i+1));
-            this.ListaArchivos.get(i).imprimirArchivo();
+            listaToString=listaToString+"\n\n   MOSTRANDO ARCHIVO "+ (i+1)+"\n"+ this.listaArchivos.get(i).toString();
         }
+        return listaToString;
     }
 }

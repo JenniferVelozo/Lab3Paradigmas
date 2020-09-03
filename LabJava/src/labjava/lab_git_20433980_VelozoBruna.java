@@ -2,13 +2,13 @@
 package labjava;
 import java.util.Scanner;
 
-public class LabJava {
+public class lab_git_20433980_VelozoBruna {
     public static void main(String[] args) {
         //Se inicializa el repositorio vacío
-        Repositorio myRepo=new Repositorio();
+        Repositorio myRepo = new Repositorio();
         myRepo.gitInit();
         //Se muestra el repositorio inicial al usuario
-        myRepo.imprimirRepositorio();
+        System.out.print(myRepo.toString());
         /**
          * Se presenta un menú al usuario mientras la opción sea distinta de 7, es decir, 
          * mientras el usuario no quiera finalizar la simulación
@@ -33,28 +33,28 @@ public class LabJava {
                     System.out.println("************************** GIT ADD *************************");
                     System.out.println("************************************************************");
                     myRepo.gitAdd();
-                    myRepo.imprimirRepositorio();
+                    System.out.print(myRepo.toString());
                     break;
                 case 2:
                     System.out.println("************************************************************");
                     System.out.println("************************* GIT COMMIT ***********************");
                     System.out.println("************************************************************");
                     myRepo.gitCommit();
-                    myRepo.imprimirRepositorio();
+                    System.out.print(myRepo.toString());
                     break;
                 case 3:
                     System.out.println("************************************************************");
                     System.out.println("************************* GIT PUSH *************************");
                     System.out.println("************************************************************");
                     myRepo.gitPush();
-                    myRepo.imprimirRepositorio();
+                    System.out.print(myRepo.toString());
                     break;
                 case 4:
                     System.out.println("************************************************************");
                     System.out.println("************************* GIT PULL *************************");
                     System.out.println("************************************************************");
                     myRepo.gitPull();
-                    myRepo.imprimirRepositorio();
+                    System.out.print(myRepo.toString());
                     break;
                 case 5:
                     System.out.println("************************************************************");
@@ -67,7 +67,7 @@ public class LabJava {
                     System.out.println("*********************** CREAR ARCHIVO **********************");
                     System.out.println("************************************************************");
                     myRepo.crearArchivo();
-                    myRepo.imprimirRepositorio();
+                    System.out.print(myRepo.toString());
                     break;
                 case 7:
                     System.out.println("Simulación finalizada");

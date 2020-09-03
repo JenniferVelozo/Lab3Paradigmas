@@ -1,5 +1,10 @@
 
 package labjava;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Clase para representar un Archivo dentro de las zonas de trabajo Workspace e Index.
  * Cada Archivo queda determinado por su nombre, fecha de modificación, y su contenido.
@@ -14,21 +19,26 @@ public class Archivo {
     /** 
      * Crea un archivo a partir de un nombre, fecha de modificación y contenido.
      * @param nombre El nombre del archivo.
-     * @param fecha La fecha de modificación del archivo.
      * @param contenido El contenido del archivo.
      */
-    public Archivo(String nombre, String fecha,String contenido){
+    public Archivo(String nombre,String contenido){
         this.nombreArchivo=nombre;
-        this.fechaMod=fecha;
+        DateFormat df=new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date fecha=new Date();
+        this.fechaMod=df.format(fecha);
         this.contenido=contenido;
     }
     
     /** 
-     * Imprime un archivo, mostrando su nombre, fecha y contenido.
+     * Entrega un string para representar un archivo, indicando el nombre, fecha y contenido.
+     * @return un string que representa un archivo.
      */
-    public void imprimirArchivo(){
-        System.out.println("    - Nombre del archivo: "+this.nombreArchivo);
-        System.out.println("    - Fecha: "+this.fechaMod);
-        System.out.println("    - Contenido: "+this.contenido);
+    @Override
+    public String toString(){
+        String ArchivoToString=
+                "    - Nombre del archivo: "+this.nombreArchivo+"\n"+
+                "    - Fecha: "+this.fechaMod+"\n"+
+                "    - Contenido: "+this.contenido;
+        return ArchivoToString;
     }
 }
