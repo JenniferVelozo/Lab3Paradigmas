@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * La clase ListaCommits representa a las zonas de trabajo Local Repository y Remote Repository.
  * Los atributos de esta clase son: un array list de tipo Commit, y la cantidad de commits de este array list.
- * Cabe destacar que, la clase ListaCommits tiene a Commit, es decir, hay una relación de asociación entre estas dos clases.
+ * Cabe destacar que, la clase ListaCommits tiene a Commit, es decir, hay una relación de agregación entre estas dos clases.
  * @author Jennifer Velozo
  * */
 public class ListaCommits {
@@ -14,7 +14,7 @@ public class ListaCommits {
     int cantidadCommits; //Cantidad de commits
     
     /** 
-     * Crea una lista de commits a partir de un ArrayList de Commits.
+     * Crea una lista de commits a partir de un ArrayList de tipo Commit.
      * @param commits ArrayList de tipo Commit.
      */
     public ListaCommits(ArrayList<Commit> commits){
@@ -25,7 +25,7 @@ public class ListaCommits {
     /** 
      * Verifica si un commit está dentro de una ListaCommits.
      * @param commit Commit a buscar.
-     * @return La posición del commit dentro de la lista, o -1 si el commit no está.
+     * @return 1 si está el commit, o 0 si no está.
      */
     public int estaCommit(Commit commit){
         for (int i=0;i<this.cantidadCommits;i++){

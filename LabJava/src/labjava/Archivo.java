@@ -17,7 +17,7 @@ public class Archivo {
     String contenido; //contenido del archivo
     
     /** 
-     * Crea un archivo a partir de un nombre, fecha de modificación y contenido.
+     * Crea un archivo a partir de un nombre, y contenido.
      * @param nombre El nombre del archivo.
      * @param contenido El contenido del archivo.
      */

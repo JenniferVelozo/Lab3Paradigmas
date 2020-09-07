@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Un Repositorio queda determinado por su nombre, autor, y las 4 zonas de trabajo: Workspace, Index,
  * Local Repository y Remote Repository. 
  * Cabe destacar que la Clase Repositorio tiene a 2 clases ListaArchivos y 2 clases ListaCommits, 
- * es decir, hay una relación de asociación entre 
+ * es decir, hay una relación de agregación entre 
  * Repositorio y ListaArchivos, y entre Repositorio y ListaCommits
  * @author Jennifer Velozo
  */
@@ -30,7 +30,7 @@ public class Repositorio {
         Scanner input = new Scanner(System.in);
         String nombre=input.nextLine();
         //Se le solicita al usuario que ingrese el autor del nuevo repositorio
-        System.out.println("Ingrese autor del nuevo repositorio");
+        System.out.println("Ingrese autor del nuevo repositorio:");
         String autor=input.nextLine();
         
         //Se inicializa vacía la zona de trabajo Workspace
@@ -60,17 +60,23 @@ public class Repositorio {
     public void gitAdd(){
         //Se le pide al usuario que ingrese una cantidad de archivos para añadir al Index
         Scanner input1 = new Scanner(System.in);
-        System.out.println("Ingrese cantidad de archivos para añadir al Index: ");
+        System.out.println("Ingrese cantidad de archivos para anadir al Index: ");
         int cantidadArchivos=input1.nextInt();
+        //Se crea un array list de strings para almacenar los nombres de archivos imngresados por el usuario
         ArrayList<String> arregloArchivos=new ArrayList<>(cantidadArchivos);
         Scanner input2 = new Scanner(System.in);
         //Se le solicita al usuario que ingrese el nombre de los archivos que desea añadir al Index
         for (int i=0;i<cantidadArchivos;i++){
             System.out.println("Ingrese nombre de archivo "+ (i+1));
             String archivo=input2.nextLine();
-            arregloArchivos.add(archivo);
+            if(arregloArchivos.contains(archivo)){
+                i--;
+                System.out.print("El archivo ya fue ingresado\n");
+            }
+            else
+                arregloArchivos.add(archivo);
         }
-        System.out.println("Los archivos que desea añadir son: ");
+        System.out.println("Los archivos que desea anadir son: ");
         for(int i=0;i<cantidadArchivos;i++){
             System.out.println(arregloArchivos.get(i));
         }
@@ -82,7 +88,7 @@ public class Repositorio {
     }
     
     /** 
-      * Crea un nuevo commit en el Local Repository con los contenidos del Index, 
+      * Crea un nuevo commit en el Local Repository con el contenido del Index, 
       * solicitando un mensaje descriptivo para dicho commit.
       */
     public void gitCommit(){
@@ -154,8 +160,6 @@ public class Repositorio {
                 //Se sobreescribe el contenido del archivo en caso de haber cambios en él.
                 this.workspace.listaArchivos.get(posicion).contenido=enviarAWS.listaArchivos.get(i).contenido;
             }
-            
-            
         }
     }
     

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * La clase ListaArchivos representa a las zonas de trabajo Workspace e Index.
  * Los atributos de esta clase son: un array list de tipo Archivo, y la cantidad de archivos de este array list.
- * Cabe destacar que, la clase ListaCommits tiene a Archivo, es decir, hay una relación de asociación entre estas dos clases.
+ * Cabe destacar que, la clase ListaCommits tiene a Archivo, es decir, hay una relación de agregación entre estas dos clases.
  * */
 public class ListaArchivos {
     //Atributos
@@ -44,7 +44,7 @@ public class ListaArchivos {
     /** 
      * Entrega una lista de archivos que sí dentro una lista de archvivos, 
      * a partir de una lista de nombres de archivos.
-     * @param nombreArchivos los nombres de archivos.
+     * @param nombreArchivos un ArrayList con los nombres de archivos.
      * @return una lista con los archivos que sí están dentro.
      */
     public ListaArchivos archivosQueEstan(ArrayList<String> nombreArchivos){

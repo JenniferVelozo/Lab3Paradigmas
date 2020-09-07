@@ -2,6 +2,10 @@
 package labjava;
 import java.util.Scanner;
 
+/**
+ * Clase principal, donde el usuario puede escoger entre las opciones.
+ * @author Jennifer Velozo
+ */
 public class lab_git_20433980_VelozoBruna {
     public static void main(String[] args) {
         //Se inicializa el repositorio vacío
@@ -15,16 +19,16 @@ public class lab_git_20433980_VelozoBruna {
          * */
         int opcion;
         do{
-            System.out.println("\n -------------------- SIMULACIÓN DE GIT --------------------");
+            System.out.println("\n -------------------- SIMULACION DE GIT --------------------");
             System.out.println("|   1. add                                                  |");
             System.out.println("|   2. commit                                               |");
             System.out.println("|   3. push                                                 |");
             System.out.println("|   4. pull                                                 |");
             System.out.println("|   5. status                                               |");
             System.out.println("|   6. Crear nuevo archivo                                  |");
-            System.out.println("|   7. Finalizar simulación                                 |");
+            System.out.println("|   7. Finalizar simulacion                                 |");
             System.out.println(" ----------------------------------------------------------- ");
-            System.out.println("\nINTRODUZCA SU OPCIÓN: ");
+            System.out.println("\nINTRODUZCA SU OPCION: ");
             Scanner input = new Scanner(System.in);
             opcion=input.nextInt();
             switch(opcion){
@@ -70,10 +74,10 @@ public class lab_git_20433980_VelozoBruna {
                     System.out.print(myRepo.toString());
                     break;
                 case 7:
-                    System.out.println("Simulación finalizada");
+                    System.out.println("Simulacion finalizada");
                     break;
                 default:
-                    System.out.println("\nLa opción ingresada no es correcta");
+                    System.out.println("\nLa opcion ingresada no es correcta");
                     break;
             }
         }while(opcion!=7);
